@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>お弁当箱ゲーム</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+      .selected {
+        border: 2px solid red;
+      }
+      /* .card.selected {
+        border: 2px solid blue; /* 選択されたカードに青い枠線を追加 */
+      } */
+    </style>
+  </head>
+  <body>
+    <h1>☆好きなお弁当を1つ選択してね☆</h1>
+    <h2>ほっかほかのお弁当をどうぞ！</h2>
+    <div class="card-container" id="cardContainer"></div>
+
+    <script>
+      const cards = [
+        { id: 1, img: 'card2.jpg', selectedImg: 'card_message.jpg' },
+        { id: 2, img: 'card2.jpg', selectedImg: 'card_message.jpg' },
+        { id: 3, img: 'card2.jpg', selectedImg: 'card_message.jpg' },
+        { id: 4, img: 'card2.jpg', selectedImg: 'card_message.jpg' },
+        { id: 5, img: 'card2.jpg', selectedImg: 'card_message.jpg' },
+        { id: 6, img: 'card2.jpg', selectedImg: 'card_message.jpg' },
+        // { id: 4, img: 'card4.jpg', selectedImg: 'card_message.jpg' },
+      ];
+      const container = document.getElementById('cardContainer');
+
+      cards.forEach((card) => {
+        let img = document.createElement('img');
+        img.src = card.img;
+        img.classList.add('card');
+        img.dataset.id = card.id;
+
+        img.addEventListener('click', function () {
+          // 他のカードの選択状態を解除し、非表示にする
+          document.querySelectorAll('.card').forEach((c) => {
+            c.classList.remove('selected');
+            c.style.display = 'none'; // 他のカードを非表示にする
+          });
+
+          // クリックされたカードの画像を変更
+          img.src = card.selectedImg;
+          img.classList.add('selected'); // 選択されたカードにクラスを追加
+          console.log('選択されたカードID:', card.id);
+
+          // クリックされたカードのみ表示を維持
+          img.style.display = 'block';
+        });
+
+        container.appendChild(img);
+      });
+
+      // const container = document.getElementById('cardContainer');
+
+      // cards.forEach((card) => {
+      //   let img = document.createElement('img');
+      //   img.src = card.img;
+      //   img.classList.add('card');
+      //   img.dataset.id = card.id;
+
+      //   img.addEventListener('click', function () {
+      //     document
+      //       .querySelectorAll('.card')
+      //       .forEach((c) => c.classList.remove('selected'));
+      //     img.classList.add('selected');
+      //     console.log('選択されたカードID:', card.id);
+      //   });
+
+      //   container.appendChild(img);
+      // });
+    </script>
+  </body>
+</html>
